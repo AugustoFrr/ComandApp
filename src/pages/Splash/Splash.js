@@ -8,10 +8,11 @@ export default class Splash extends Component {
 
     componentDidMount() {
         setTimeout(() => {
-            const unsubscribe = firebaseApp.auth().onAuthStateChanged((user) => {
+            const unsubscribe = firebaseApp.auth().onAuthStateChanged(async (user) => {
                 if (user) {
 
                     if (user.emailVerified) {
+                        await firebaseApp.database().ref("Users").child(user.uid).child("Email").set(user.email);                       
                         this.props.navigation.replace("Main")
                     } else {
                         this.props.navigation.replace("EmailVerification")
@@ -22,7 +23,7 @@ export default class Splash extends Component {
                 unsubscribe()
             })
 
-        }, 1000)
+        }, 2000)
     }
 
     render() {

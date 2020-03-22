@@ -10,7 +10,8 @@ export default class Register extends Component {
     register() {
         firebaseApp.auth().createUserWithEmailAndPassword(this.state.email.trim(), this.state.password.trim()).then(() => {
             firebaseApp.auth().currentUser.sendEmailVerification();
-            firebaseApp.database().ref("Users").child(firebaseApp.auth().currentUser.uid).child("Name").set((this.state.name).trim());
+            firebaseApp.database().ref("Users").child(firebaseApp.auth().currentUser.uid).set({Name: (this.state.name).trim(), Email: this.state.email.trim(), IncompleteProfile: true})
+            
             this.props.navigation.replace("EmailVerification")
             this.props.navigation.reset({index: 0, routes: [{name: "EmailVerification"}]});
 

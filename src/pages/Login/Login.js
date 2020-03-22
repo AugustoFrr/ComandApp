@@ -48,8 +48,8 @@ export default class Login extends Component {
     render() {
         return (
             <View style={mainStyles.container}>
-                <TextInput style={mainStyles.input} placeholder="E-mail" onChangeText={email => this.setState({ email })} />
-                <TextInput style={mainStyles.input} placeholder="Senha" onChangeText={senha => this.setState({ senha })} />
+                <TextInput style={mainStyles.input} keyboardType="email-address" placeholder="E-mail" onChangeText={email => this.setState({ email })} />
+                <TextInput style={mainStyles.input} secureTextEntry={true} placeholder="Senha" onChangeText={senha => this.setState({ senha })} />
                 <TouchableOpacity onPress={() => this.login()}>
                     <Text>
                         Entrar
