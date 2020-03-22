@@ -11,7 +11,7 @@ export default class Login extends Component {
     login() {
         firebaseApp.auth().setPersistence(firebaseApp.auth.Auth.Persistence.LOCAL).then(() => {
             return firebaseApp.auth().signInWithEmailAndPassword(this.state.email.trim(), this.state.senha.trim()).then(() => {
-                if(firebaseApp.auth().currentUser.emailVerified){
+                if (firebaseApp.auth().currentUser.emailVerified) {
                     this.props.navigation.replace("Main")
                 } else {
                     this.props.navigation.replace("EmailVerification")
@@ -40,6 +40,22 @@ export default class Login extends Component {
         })
     }
 
+    resetPassword() {
+        firebaseApp.auth().sendPasswordResetEmail(this.state.email).then(() => {
+            ToastAndroid.show("E-mail de recuperação enviado", ToastAndroid.LONG);
+        }).catch((error) => {
+            if (error.code == "auth/invalid-email") {
+                ToastAndroid.show("E-mail inválido", ToastAndroid.LONG);
+
+            } else if (error.code == "auth/user-not-found") {
+                ToastAndroid.show("E-mail de recuperação enviado", ToastAndroid.LONG);
+
+            } else {
+                ToastAndroid.show("Parece que temos um problema interno, tente novamente em alguns instantes!", ToastAndroid.LONG);
+            }
+        })
+    }
+
     state = {
         email: "",
         senha: ""
@@ -53,6 +69,12 @@ export default class Login extends Component {
                 <TouchableOpacity onPress={() => this.login()}>
                     <Text>
                         Entrar
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => this.resetPassword()}>
+                    <Text>
+                        Esqueceu sua senha?
                     </Text>
                 </TouchableOpacity>
 

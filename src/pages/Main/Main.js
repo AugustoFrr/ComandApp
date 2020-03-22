@@ -8,15 +8,38 @@ export default class Main extends Component {
 
     componentDidMount() {
         let usersRef = firebaseApp.database().ref("Users");
-        usersRef.child(firebaseApp.auth().currentUser.uid).child("incompleteProfile").once("value", (snapshot)=>{
-            if(snapshot.val()){
+        usersRef.child(firebaseApp.auth().currentUser.uid).child("IncompleteProfile").once("value", (snapshot) => {
+            if (snapshot.val()) {
                 ToastAndroid.show("Complete seu perfil para utilizar nossos serviços!", ToastAndroid.LONG)
             }
         })
+
+        this.userValidation()
+
+    }
+
+    async userValidation() {
+        const validationInterval = setInterval(() => {
+            if (firebaseApp.auth().currentUser != null) {
+                firebaseApp.auth().currentUser.reload().then(() => {
+                    // ToastAndroid.show("reloading " + firebaseApp.auth().currentUser.email, ToastAndroid.LONG)
+                }).catch((error) => {
+                    if (error.code == "auth/user-token-expired") {
+                        firebaseApp.auth().signOut().then(() => {
+                            ToastAndroid.show("Faça login novamente!", ToastAndroid.LONG)
+                            this.props.navigation.reset({ index: 0, routes: [{ name: "Login" }] });
+                            clearInterval(validationInterval)
+                        })
+                    }
+                })
+            } else {
+                clearInterval(validationInterval)
+            }
+        }, 30000)
     }
 
     logout() {
-        firebaseApp.auth().signOut().then(()=>{
+        firebaseApp.auth().signOut().then(() => {
             this.props.navigation.replace("Login")
         })
 

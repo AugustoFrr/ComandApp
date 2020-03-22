@@ -12,7 +12,6 @@ export default class Splash extends Component {
                 if (user) {
 
                     if (user.emailVerified) {
-                        await firebaseApp.database().ref("Users").child(user.uid).child("Email").set(user.email);                       
                         this.props.navigation.replace("Main")
                     } else {
                         this.props.navigation.replace("EmailVerification")
