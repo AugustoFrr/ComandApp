@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, TextInput, ToastAndroid } from 'react-native';
 import firebaseApp from '../../FirebaseConnection'
 import mainStyles from '../../MainStyles'
+import { TextInputMask } from 'react-native-masked-text'
 
 
 export default class Profile extends Component {
@@ -31,21 +32,26 @@ export default class Profile extends Component {
     }
 
     updateUser() {
+
         if (this.state.personalButtonText == "Alterar dados pessoais") {
             this.setState({ editableField: true })
             this.setState({ personalButtonText: "Concluir" })
         } else {
-            let userId = firebaseApp.auth().currentUser.uid
-            firebaseApp.database().ref("Users").child(userId).update({
-                "Name": this.state.name.trim(),
-                "Phone": this.state.phone.trim(),
-                "CPF": this.state.cpf.trim(),
-                "Birth": this.state.birth.trim(),
-                "IncompleteProfile": (this.state.name == "" || this.state.phone == "" || this.state.cpf == "" || this.state.birth == "") ? true : false 
-            }).then(() => {
-                this.setState({ personalButtonText: "Alterar dados pessoais" })
-                this.setState({ editableField: false })
-            })
+            if (this.state.cpf == "" || this.cpfField.isValid()) {
+                let userId = firebaseApp.auth().currentUser.uid
+                firebaseApp.database().ref("Users").child(userId).update({
+                    "Name": this.state.name.trim(),
+                    "Phone": this.state.phone.trim(),
+                    "CPF": this.state.cpf.trim(),
+                    "Birth": this.state.birth.trim(),
+                    "IncompleteProfile": (this.state.name == "" || this.state.phone == "" || this.state.cpf == "" || this.state.birth == "") ? true : false
+                }).then(() => {
+                    this.setState({ personalButtonText: "Alterar dados pessoais" })
+                    this.setState({ editableField: false })
+                })
+            } else {
+                ToastAndroid.show("CPF inválido!", ToastAndroid.LONG);
+            }
         }
     }
 
@@ -146,7 +152,8 @@ export default class Profile extends Component {
         changePassword: false,
         newEmail: "",
         password: "",
-        newPassword: ""
+        newPassword: "",
+        validCPF: undefined,
     }
 
     render() {
@@ -156,11 +163,20 @@ export default class Profile extends Component {
                     Perfil
                 </Text>
 
-                <TextInput style={mainStyles.input} editable={this.state.editableField} value={this.state.name} placeholder="Nome Completo" onChangeText={name => this.setState({ name })} />
-                <TextInput style={mainStyles.input} editable={this.state.editableField} value={this.state.phone} keyboardType="phone-pad" placeholder="Telefone" onChangeText={phone => this.setState({ phone })} />
-                <TextInput style={mainStyles.input} editable={this.state.editableField} value={this.state.cpf} keyboardType="number-pad" placeholder="CPF (somente números)" onChangeText={cpf => this.setState({ cpf })} />
-                <TextInput style={mainStyles.input} editable={this.state.editableField} value={this.state.birth} keyboardType="number-pad" placeholder="Data de Nascimento (dd/mm/aaaa)" onChangeText={birth => this.setState({ birth })} />
-                <TouchableOpacity onPress={() => this.updateUser()}>
+                <TextInput style={mainStyles.input} editable={this.state.editableField} value={this.state.name}
+                    placeholder="Nome Completo" onChangeText={name => this.setState({ name })} />
+
+                <TextInputMask style={mainStyles.input} type={'cel-phone'} options={{ maskType: 'BRL', withDDD: true, dddMask: '(99) ' }}
+                    editable={this.state.editableField} value={this.state.phone} keyboardType="phone-pad" placeholder="Telefone" onChangeText={phone => this.setState({ phone })} />
+
+                <TextInputMask style={mainStyles.input} type={'cpf'} editable={this.state.editableField} value={this.state.cpf} keyboardType="number-pad"
+                    placeholder="CPF (somente números)" ref={(ref) => this.cpfField = ref}
+                    onChangeText={cpf => { this.setState({ cpf }) }} />
+
+                <TextInputMask style={mainStyles.input} type={'datetime'} options={{ format: 'DD/MM/YYYY' }} editable={this.state.editableField} value={this.state.birth} keyboardType="number-pad"
+                    placeholder="Data de Nascimento (dd/mm/aaaa)" onChangeText={birth => this.setState({ birth })} />
+
+                <TouchableOpacity ref={(ref) => this.updateButton = ref} onPress={() => { this.updateUser() }}>
                     <Text>
                         {this.state.personalButtonText}
                     </Text>
