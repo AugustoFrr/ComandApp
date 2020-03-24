@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 import { View, Text, Image, TouchableOpacity, Modal, ToastAndroid } from 'react-native';
 import firebaseApp from '../../FirebaseConnection';
+import QRCode from 'react-native-qrcode-svg'
 
+const logo = require('../../img/comandico.png')
 
 export default class Main extends Component {
 
@@ -47,7 +49,7 @@ export default class Main extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
                 <Text>MAIN</Text>
 
                 <TouchableOpacity onPress={() => this.props.navigation.navigate("Profile")}>
@@ -55,6 +57,8 @@ export default class Main extends Component {
                         Perfil
                     </Text>
                 </TouchableOpacity>
+
+                <QRCode value="Bem-vindo ao ComandApp!" logo={logo} logoBackgroundColor="#000000" size={300} logoSize={80}  />
 
                 <TouchableOpacity onPress={() => this.logout()}>
                     <Text>
