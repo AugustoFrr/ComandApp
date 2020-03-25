@@ -1,4 +1,4 @@
-import React from 'react'
+import React  from 'react'
 
 import Main from './pages/Main/Main'
 import Splash from './pages/Splash/Splash'
@@ -6,6 +6,7 @@ import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import EmailVerification from './pages/EmailVerification/EmailVerification'
 import Profile from './pages/Profile/Profile'
+import Comanda from './pages/Comanda/Comanda'
 
 import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
@@ -19,6 +20,7 @@ export default function Routes() {
             <Stack.Screen name="Register" component={Register} />
             <Stack.Screen name="EmailVerification" component={EmailVerification} />
             <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name="Comanda" component={Comanda} />
         </Stack.Navigator>
     )
 }
