@@ -10,27 +10,14 @@ export default class Comanda extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{backgroundColor: "#cc4", flex: 1}}>
                 <Text>
                     Comanda
                 </Text>
 
-                <QRCodeScanner
-                    onRead={()=>{ToastAndroid.show("QRCode Lido!", ToastAndroid.LONG)}}
-                    
-                    topContent={
-                        <Text style={styles.centerText}>
-                            Go to{' '}
-                            <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
-                        your computer and scan the QR code.
-                      </Text>
-                    }
-                    bottomContent={
-                        <TouchableOpacity style={styles.buttonTouchable}>
-                            <Text style={styles.buttonText}>OK. Got it!</Text>
-                        </TouchableOpacity>
-                    }
-                />
+                {/* <QRCode value={"Bem vindo ao comandapp"} size={200} 
+                logo={logo} logoSize={30}
+                logoBackgroundColor='black'/> */}
 
             </View>
         )

@@ -57,9 +57,15 @@ export default class Main extends Component {
                     </Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Comanda") }}>
+                <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Scanner") }}>
                     <Text>
-                        Entrar no restaurante...
+                        ESCANEAR
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>{this.props.navigation.navigate("TabRoutes", {screen: "Comanda"}) }}>
+                    <Text>
+                        ENTRAR
                     </Text>
                 </TouchableOpacity>
 
