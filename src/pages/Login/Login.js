@@ -1,12 +1,33 @@
 import React, { Component } from 'react';
 
-import { View, Text, Image, TouchableOpacity, Modal, TextInput, ToastAndroid } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Keyboard, TextInput, ToastAndroid, ImageBackground } from 'react-native';
 import styles from './Styles'
 import mainStyles from '../../MainStyles'
 import firebaseApp from '../../FirebaseConnection'
-
+import Icon from 'react-native-vector-icons/SimpleLineIcons'
+const backgroundImage = require("../../img/background.png")
+const comandico = require("../../img/Comandico.png")
+import Colors from '../../styles/colors'
 
 export default class Login extends Component {
+
+    componentDidMount() {
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+    }
+
+    keyboardDidShow = () => {
+        this.setState({ showHeader: false })
+    }
+
+    keyboardDidHide = () => { this.setState({ showHeader: true }) }
+
+
+
+    componentWillUnmount() {
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
+    }
 
     login() {
         firebaseApp.auth().setPersistence(firebaseApp.auth.Auth.Persistence.LOCAL).then(() => {
@@ -58,35 +79,90 @@ export default class Login extends Component {
 
     state = {
         email: "",
-        senha: ""
+        senha: "",
+        showHeader: true
     }
 
     render() {
         return (
-            <View style={mainStyles.container}>
-                <TextInput style={mainStyles.input} keyboardType="email-address" placeholder="E-mail" onChangeText={email => this.setState({ email })} />
-                <TextInput style={mainStyles.input} secureTextEntry={true} placeholder="Senha" onChangeText={senha => this.setState({ senha })} />
-                <TouchableOpacity onPress={() => this.login()}>
-                    <Text>
-                        Entrar
-                    </Text>
-                </TouchableOpacity>
+            <ImageBackground source={backgroundImage} resizeMode="repeat" style={styles.container}>
 
-                <TouchableOpacity onPress={() => this.resetPassword()}>
-                    <Text>
-                        Esqueceu sua senha?
-                    </Text>
-                </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => {
-                    this.props.navigation.navigate("Register")
-                }}>
-                    <Text>
-                        Não possui uma conta? Cadastre-se aqui!
-                    </Text>
-                </TouchableOpacity>
+                {this.state.showHeader ?
+                    <View style={{ flex: 3, paddingTop: 15,  width: "90%"}}>
 
-            </View>
+                        <View style={{flex: 2, alignItems: "center", justifyContent: "center"}}>
+
+                            <Image source={comandico} style={{width: 100, height: 70}}/>
+                            <Text style={{fontSize: 20, fontFamily: "Century Gothic"}}>ComandApp</Text>
+
+                        </View>
+
+                        <View style-={{flex: 1}}>
+
+                            <Text style={styles.titulo}>
+                                Olá!
+                            </Text>
+
+                            <Text style={styles.subTitulo}>
+                                Faça login e aproveite nossos serviços
+                            </Text>
+                        </View>
+
+
+
+
+
+                    </View> :
+
+                    <View>
+                        <Text style={{fontSize: 20, fontFamily: "Century Gothic", marginTop: 25}}>ComandApp</Text>
+                    </View>}
+
+
+
+                <View style={{ flex: 3, width: "90%", justifyContent: "center", marginTop: 10 }}>
+
+                    <View style={styles.viewInput}>
+                        <Icon style={styles.iconInput} name="envelope" size={20} color={Colors.OutText} />
+                        <TextInput style={styles.input} keyboardType="email-address" placeholder="E-mail" onChangeText={email => this.setState({ email })} />
+
+                    </View>
+
+                    <View style={styles.viewInput}>
+                        <Icon style={styles.iconInput} name="lock" size={20} color={Colors.OutText} />
+                        <TextInput style={styles.input} secureTextEntry={true} placeholder="Senha" onChangeText={senha => this.setState({ senha })} />
+
+                    </View>
+
+
+                    <TouchableOpacity onPress={() => this.resetPassword()}>
+                        <Text style={styles.passwordForgotText}>
+                            Esqueceu sua senha?
+                        </Text>
+                    </TouchableOpacity>
+
+                </View>
+
+                <View style={{ flex: 3, width: "90%", alignItems: "center" }}>
+                    <TouchableOpacity style={styles.btnEntrar} onPress={() => this.login()}>
+                        <Text style={styles.btnEntrarText}>
+                            Entrar
+                        </Text>
+                    </TouchableOpacity>
+
+
+
+                    <TouchableOpacity onPress={() => { this.props.navigation.navigate("Register") }}>
+                        <Text style={styles.registerText}>
+                            Não possui uma conta? Cadastre-se aqui!
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            </ImageBackground>
+
+
+
         )
     }
 }

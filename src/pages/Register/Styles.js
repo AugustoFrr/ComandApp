@@ -2,48 +2,27 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import Colors from '../../styles/colors'
 
-
 export default styles = StyleSheet.create({
     container: {
         backgroundColor: '#F6F6F6',
         flex: 1,
-        width: "100%",
         alignItems: 'center',
         justifyContent: 'center'
     },
 
-
     titulo: {
         fontSize: 26,
         fontFamily: "Century Gothic",
-        color: Colors.OutText,
-        
+        color: "#FFFFFF"
     },
 
     subTitulo: {
         fontSize: 18,
         fontFamily: "Century Gothic",
-        color: Colors.OutText,
-        
+        color: "#FFFFFF"
 
     },
 
-    btnEntrar: {
-        backgroundColor: Colors.primary,
-        width: "70%",
-        height: 50,
-        justifyContent: "center",
-        borderRadius: 10,
-
-
-    },
-
-    btnEntrarText: {
-        fontSize: 22,
-        color: "#FFFFFF",
-        fontFamily: "Century Gothic",
-        alignSelf: "center"
-    },
     input: {
         flex: 1,
         paddingTop: 10,
@@ -56,29 +35,9 @@ export default styles = StyleSheet.create({
 
     },
 
-    passwordForgotText: {
-        marginTop: 15,
-        fontSize: 15,
-        alignSelf: "center",
-        borderBottomWidth: 1,
-        borderBottomColor: Colors.OutText,
-        color: Colors.OutText,
-        paddingBottom: 5,
-        fontFamily: "Century Gothic"
-    },
-
-    registerText: {
-        marginTop: 30,
-        fontSize: 15,
-        alignSelf: "center",
-
-        color: Colors.OutText,
-        paddingBottom: 5,
-        fontFamily: "Century Gothic"
-    },
-
     viewInput: {
 
+        
         marginTop: 10,
         flexDirection: 'row',
         justifyContent: 'center',
@@ -99,6 +58,23 @@ export default styles = StyleSheet.create({
 
     iconInput: {
         padding: 10
-    }
+    },
 
-});
+    btnCadastrar: {
+        backgroundColor: Colors.primary,
+        width: "70%",
+        height: 50,
+        justifyContent: "center",
+        borderRadius: 10,
+
+
+    },
+
+    btnCadastrarText: {
+        fontSize: 22,
+        color: "#FFFFFF",
+        fontFamily: "Century Gothic",
+        alignSelf: "center"
+    },
+
+})

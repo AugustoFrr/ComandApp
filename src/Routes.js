@@ -13,10 +13,8 @@ import ProductMenu from './pages/ProductMenu/ProductMenu'
 import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
-
 
 export default function Routes() {
     return (
