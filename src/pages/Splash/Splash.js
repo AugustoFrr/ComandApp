@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
 
-import { View, Text, Image, ToastAndroid } from 'react-native';
+import { View, Text, Image, ToastAndroid, ImageBackground, Animated, Dimensions } from 'react-native';
 import firebaseApp from '../../FirebaseConnection'
 import styles from './Styles'
+const comandico = require("../../img/comandico.png")
+const backgroundImage = require("../../img/background.png")
+
+
+
 
 export default class Splash extends Component {
 
     componentDidMount() {
+        this.startLogoAnimation()
         setTimeout(() => {
             const unsubscribe = firebaseApp.auth().onAuthStateChanged(async (user) => {
                 if (user) {
 
                     if (user.emailVerified) {
-                        this.props.navigation.replace("Main")
+                        this.props.navigation.replace("Main", {screen: "Home"})
                     } else {
                         this.props.navigation.replace("EmailVerification")
                     }
@@ -25,12 +31,49 @@ export default class Splash extends Component {
         }, 2000)
     }
 
+
+    state = {
+        scaleValue: new Animated.Value(0),
+
+    }
+
+    scale = this.state.scaleValue.interpolate({
+        inputRange: [0, 1, 2],
+        outputRange: [1, 0.6, 1]
+
+    })
+
+
+
+    startLogoAnimation = () => {
+        Animated.loop(
+            Animated.timing(this.state.scaleValue, {
+                
+                toValue: 2,
+                duration: 1000,
+                useNativeDriver: true
+            }),
+
+            
+
+        ).start()
+    }
+
+    
+
     render() {
         return (
-            <View style={styles.background}>
-                <Text style={styles.texto}>SPLASH</Text>
+            <ImageBackground source={backgroundImage} style={styles.container} resizeMode="repeat">
 
-            </View>
+                <Animated.View style={[styles.viewLogo ]}>
+                    <Animated.Image source={comandico} style={[styles.imageStyle, { transform: [{ scale: this.scale }]}]} />
+                
+                </Animated.View>
+
+
+
+
+            </ImageBackground>
         )
     }
 }

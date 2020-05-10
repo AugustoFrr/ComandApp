@@ -6,7 +6,7 @@ import mainStyles from '../../MainStyles'
 import firebaseApp from '../../FirebaseConnection'
 import Icon from 'react-native-vector-icons/SimpleLineIcons'
 const backgroundImage = require("../../img/background.png")
-const comandico = require("../../img/Comandico.png")
+const comandico = require("../../img/comandico.png")
 import Colors from '../../styles/colors'
 
 export default class Login extends Component {
@@ -87,18 +87,17 @@ export default class Login extends Component {
         return (
             <ImageBackground source={backgroundImage} resizeMode="repeat" style={styles.container}>
 
-
                 {this.state.showHeader ?
-                    <View style={{ flex: 3, paddingTop: 15,  width: "90%"}}>
+                    <View style={{ flex: 3, width: "90%" }}>
 
-                        <View style={{flex: 2, alignItems: "center", justifyContent: "center"}}>
+                        <View style={{ flex: 2, alignItems: "center", justifyContent: "center",  marginTop: 20 }}>
 
-                            <Image source={comandico} style={{width: 100, height: 70}}/>
-                            <Text style={{fontSize: 20, fontFamily: "Century Gothic"}}>ComandApp</Text>
+                            <Image source={comandico} style={{ width: 100, height: 70 }} />
+                            <Text style={{ color: Colors.OutText, fontSize: 20, fontFamily: "Century Gothic" }}>ComandApp</Text>
 
                         </View>
 
-                        <View style-={{flex: 1}}>
+                        <View style-={{ flex: 1 }}>
 
                             <Text style={styles.titulo}>
                                 Olá!
@@ -115,22 +114,22 @@ export default class Login extends Component {
 
                     </View> :
 
-                    <View>
-                        <Text style={{fontSize: 20, fontFamily: "Century Gothic", marginTop: 25}}>ComandApp</Text>
+                    <View style={{ flex: 1, alignItems: "center", justifyContent: "flex-end" }}>
+                        <Text style={{ color: Colors.OutText, fontSize: 20, fontFamily: "Century Gothic" }}>ComandApp</Text>
                     </View>}
 
 
 
-                <View style={{ flex: 3, width: "90%", justifyContent: "center", marginTop: 10 }}>
+                <View style={{ flex: this.state.showHeader ? 3 : 2, width: "90%", justifyContent: "flex-start" }}>
 
                     <View style={styles.viewInput}>
-                        <Icon style={styles.iconInput} name="envelope" size={20} color={Colors.OutText} />
+                        <Icon style={styles.iconInput} name="envelope" size={20} color={Colors.primary} />
                         <TextInput style={styles.input} keyboardType="email-address" placeholder="E-mail" onChangeText={email => this.setState({ email })} />
 
                     </View>
 
                     <View style={styles.viewInput}>
-                        <Icon style={styles.iconInput} name="lock" size={20} color={Colors.OutText} />
+                        <Icon style={styles.iconInput} name="lock" size={20} color={Colors.primary} />
                         <TextInput style={styles.input} secureTextEntry={true} placeholder="Senha" onChangeText={senha => this.setState({ senha })} />
 
                     </View>
@@ -144,7 +143,7 @@ export default class Login extends Component {
 
                 </View>
 
-                <View style={{ flex: 3, width: "90%", alignItems: "center" }}>
+                <View style={{ flex: this.state.showHeader ? 1 : 2, width: "90%", alignItems: "center", justifyContent: "center"}}>
                     <TouchableOpacity style={styles.btnEntrar} onPress={() => this.login()}>
                         <Text style={styles.btnEntrarText}>
                             Entrar
@@ -153,12 +152,18 @@ export default class Login extends Component {
 
 
 
+
+                </View>
+
+                <View style={{ flex: this.state.showHeader ? 1 : 4, width: "90%", alignItems: "center" }}>
                     <TouchableOpacity onPress={() => { this.props.navigation.navigate("Register") }}>
                         <Text style={styles.registerText}>
                             Não possui uma conta? Cadastre-se aqui!
                         </Text>
                     </TouchableOpacity>
                 </View>
+
+
             </ImageBackground>
 
 

@@ -6,7 +6,7 @@ import styles from './Styles'
 import Icon from 'react-native-vector-icons/SimpleLineIcons'
 import Colors from '../../styles/colors'
 const backgroundImage = require("../../img/background.png")
-const comandico = require("../../img/Comandico.png")
+const comandico = require("../../img/comandico.png")
 
 
 
@@ -76,48 +76,45 @@ export default class Register extends Component {
 
                 {this.state.showHeader ?
                     <>
-                    <View style={{ flex: 1 }}>
+                        <View style={{ flex: 1 }}>
 
-                    </View>
+                        </View>
 
-                    <View style={{
-                        flex: 1, alignItems: "center", justifyContent: "center", padding: 15, width: "100%",
-                        backgroundColor: Colors.primary,
-                        }}>
+                        <View style={styles.cabecalho}>
 
-                        
-                        <Text style={styles.titulo}>
-                            Junte-se a nós,
+
+                            <Text style={styles.titulo}>
+                                Junte-se a nós,
                         </Text>
 
-                        <Text style={styles.subTitulo}>
-                            e descubra uma nova forma de consumir!
+                            <Text style={styles.subTitulo}>
+                                e descubra uma nova forma de consumir!
                         </Text>
 
 
-                    </View></> :
+                        </View></> :
 
-                    <View>
-                        <Text style={{ fontSize: 20, fontFamily: "Century Gothic", marginTop: 25 }}>ComandApp</Text>
+                    <View style={{ flex: 1, alignItems: "center", justifyContent: "flex-end" }}>
+                        <Text style={{ color: Colors.OutText, fontSize: 20, fontFamily: "Century Gothic" }}>ComandApp</Text>
                     </View>}
 
                 <View style={{ flex: 3, width: "90%", justifyContent: "center" }}>
 
 
                     <View style={styles.viewInput}>
-                        <Icon style={styles.iconInput} name="user" size={20} color={Colors.OutText} />
+                        <Icon style={styles.iconInput} name="user" size={20} color={Colors.primary} />
                         <TextInput style={styles.input} placeholder="Nome Completo" onChangeText={name => this.setState({ name })} />
 
                     </View>
 
                     <View style={styles.viewInput}>
-                        <Icon style={styles.iconInput} name="envelope" size={20} color={Colors.OutText} />
+                        <Icon style={styles.iconInput} name="envelope" size={20} color={Colors.primary} />
                         <TextInput style={styles.input} keyboardType="email-address" placeholder="E-mail" onChangeText={email => this.setState({ email })} />
 
                     </View>
 
                     <View style={styles.viewInput}>
-                        <Icon style={styles.iconInput} name="lock" size={20} color={Colors.OutText} />
+                        <Icon style={styles.iconInput} name="lock" size={20} color={Colors.primary} />
                         <TextInput style={styles.input} secureTextEntry={true} placeholder="Senha" onChangeText={password => this.setState({ password })} />
 
                     </View>
@@ -135,6 +132,9 @@ export default class Register extends Component {
                         </Text>
                     </TouchableOpacity>
                 </View>
+
+
+                {this.state.showHeader ? <View></View>: <View style={{flex: 4}}></View>}
 
             </ImageBackground>
         )

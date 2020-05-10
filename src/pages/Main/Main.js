@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 
-import { View, Text, Image, TouchableOpacity, Modal, ToastAndroid } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Modal, ToastAndroid, ImageBackground } from 'react-native';
 import firebaseApp from '../../FirebaseConnection';
+import Icon from 'react-native-vector-icons/SimpleLineIcons'
+const comandico = require("../../img/comandico.png")
+const backgroundImage = require("../../img/background.png")
+const scanner = require("../../img/scan_qrcode.png")
+
+import styles from "./Styles"
+import Colors from "../../styles/colors";
+
+
 
 
 
@@ -39,43 +48,54 @@ export default class Main extends Component {
         }, 30000)
     }
 
-    logout() {
-        firebaseApp.auth().signOut().then(() => {
-            this.props.navigation.replace("Login")
-        })
-
-    }
+    
 
     render() {
         return (
-            <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
-                <Text>MAIN</Text>
-
-                <TouchableOpacity onPress={() => this.props.navigation.navigate("Profile")}>
-                    <Text>
-                        Perfil
-                    </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Scanner") }}>
-                    <Text>
-                        ESCANEAR
-                    </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>{this.props.navigation.navigate("TabRoutes", {screen: "Comanda"}) }}>
-                    <Text>
-                        ENTRAR
-                    </Text>
-                </TouchableOpacity>
+            <ImageBackground source={backgroundImage} resizeMode="repeat" style={styles.container}>
 
 
-                <TouchableOpacity onPress={() => this.logout()}>
-                    <Text>
-                        Sair
-                    </Text>
-                </TouchableOpacity>
-            </View>
+
+                <View style={{ marginTop: 25, flex: 2, alignItems: "center", justifyContent: "center" }}>
+
+                    <Image source={comandico} style={{ width: 100, height: 70 }} />
+                    <Text style={{ fontSize: 20, fontFamily: "Century Gothic" }}>ComandApp</Text>
+
+                </View>
+
+
+
+                <View style={styles.scanContainer} >
+                    <TouchableOpacity style={{ alignSelf: "flex-end" }}>
+                        <Icon name="question" size={25} color={Colors.primary} />
+
+                    </TouchableOpacity>
+
+                    <View style={styles.scanView}>
+                        <TouchableOpacity style={{ flex: 1 }} onPress={() => { this.props.navigation.navigate("Scanner") }}>
+                            <ImageBackground source={scanner} resizeMode="center" style={styles.scanImage}> 
+                                
+                            </ImageBackground>
+
+                            <Text style={{ marginTop: 15, fontSize: 18, textAlign: "center", fontFamily: "Century Gothic", color: Colors.primary }}>
+                                Clique para escanear o QRCode de uma mesa ou amigo!
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+
+
+
+
+                </View>
+
+                <View style={{ flex: 1 }}></View>
+
+
+
+
+
+
+            </ImageBackground>
         )
     }
 }

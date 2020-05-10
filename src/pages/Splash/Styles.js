@@ -1,15 +1,37 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../styles/colors'
 
 export default styles = StyleSheet.create({
-    background:{
-        backgroundColor: Colors.primary,
+    container: {
+        backgroundColor: '#F6F6F6',
         flex: 1,
+        alignItems: 'center',
         justifyContent: 'center',
-        alignItems: 'center'
+        height: Dimensions.get('window').height
     },
     texto:{
         fontSize: 36
+    }, 
+    imageStyle: {
+        width: Dimensions.get('window').width * 0.4,
+        height: Dimensions.get('window').width * 0.4,
+        
+    },
+
+    textStyle: {
+        fontSize: 24,
+        color: Colors.primary,
+        fontFamily: 'Century Gothic',
+        
+        
+        
+    },
+
+    viewLogo:{
+        alignItems: "center",
+        width: "100%",
+        justifyContent: "center",
+        flexDirection: 'row'
     }
 })

@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../styles/colors'
+
 
 
 export default styles = StyleSheet.create({
@@ -9,7 +10,8 @@ export default styles = StyleSheet.create({
         flex: 1,
         width: "100%",
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        height: Dimensions.get('window').height
     },
 
 

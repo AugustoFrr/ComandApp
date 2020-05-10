@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../styles/colors'
 
 export default styles = StyleSheet.create({
@@ -7,7 +7,8 @@ export default styles = StyleSheet.create({
         backgroundColor: '#F6F6F6',
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        height: Dimensions.get('window').height
     },
 
     titulo: {
@@ -76,5 +77,27 @@ export default styles = StyleSheet.create({
         fontFamily: "Century Gothic",
         alignSelf: "center"
     },
+    cabecalho: {
+
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 15,
+        width: "100%",
+        backgroundColor: Colors.primary,
+        borderColor: "#fff",
+        borderBottomWidth: 0.3,
+        borderTopWidth: 0.3,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+
+        elevation: 24,
+
+    }
 
 })

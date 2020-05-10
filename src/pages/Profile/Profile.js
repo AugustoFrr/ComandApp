@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 
-import { View, Text, Image, TouchableOpacity, TextInput, ToastAndroid } from 'react-native';
+import { View, Text, Image, TouchableOpacity, TextInput, ToastAndroid, ImageBackground } from 'react-native';
 import firebaseApp from '../../FirebaseConnection'
 import mainStyles from '../../MainStyles'
 import { TextInputMask } from 'react-native-masked-text'
+import styles from './Styles'
+import Icon from 'react-native-vector-icons/SimpleLineIcons'
+const backgroundImage = require("../../img/background.png")
+const comandico = require("../../img/comandico.png")
+import Colors from '../../styles/colors'
 
 
 export default class Profile extends Component {
 
-
-
     componentDidMount() {
-
         this.getData()
+    }
 
+    logout() {
+        firebaseApp.auth().signOut().then(() => {
+            this.props.navigation.replace("Login")
+        })
 
     }
 
@@ -158,23 +165,28 @@ export default class Profile extends Component {
 
     render() {
         return (
-            <View>
-                <Text>
-                    Perfil
-                </Text>
+            <ImageBackground source={backgroundImage} resizeMode="repeat" style={styles.container}>
+                <Text>{`Olá ${this.state.name.substring(0, this.state.name.indexOf(" ") !== "" ? this.state.name.indexOf(" ") : this.state.name.length)}!`}</Text>
 
                 <TextInput style={mainStyles.input} editable={this.state.editableField} value={this.state.name}
-                    placeholder="Nome Completo" onChangeText={name => this.setState({ name })} />
+                    placeholder="Nome Completo" onChangeText={name => this.setState({ name })} 
+                    onSubmitEditing={() => { this.telefoneTextInput.getElement().focus() }} blurOnSubmit={false} ref={(input) => { this.nameTextInput = input; }} />
+                    
 
                 <TextInputMask style={mainStyles.input} type={'cel-phone'} options={{ maskType: 'BRL', withDDD: true, dddMask: '(99) ' }}
-                    editable={this.state.editableField} value={this.state.phone} keyboardType="phone-pad" placeholder="Telefone" onChangeText={phone => this.setState({ phone })} />
+                    editable={this.state.editableField} value={this.state.phone} keyboardType="phone-pad" 
+                    placeholder="Telefone" onChangeText={phone => this.setState({ phone })} 
+                    onSubmitEditing={() => { this.cpfField.getElement().focus() }} blurOnSubmit={false} ref={(input) => { this.telefoneTextInput = input; }} />
 
                 <TextInputMask style={mainStyles.input} type={'cpf'} editable={this.state.editableField} value={this.state.cpf} keyboardType="number-pad"
                     placeholder="CPF (somente números)" ref={(ref) => this.cpfField = ref}
-                    onChangeText={cpf => { this.setState({ cpf }) }} />
+                    onChangeText={cpf => { this.setState({ cpf }) }}  
+                    onSubmitEditing={() => { this.birthDateTextInput.getElement().focus() }} blurOnSubmit={false} />
 
-                <TextInputMask style={mainStyles.input} type={'datetime'} options={{ format: 'DD/MM/YYYY' }} editable={this.state.editableField} value={this.state.birth} keyboardType="number-pad"
-                    placeholder="Data de Nascimento (dd/mm/aaaa)" onChangeText={birth => this.setState({ birth })} />
+                <TextInputMask style={mainStyles.input} type={'datetime'} options={{ format: 'DD/MM/YYYY' }} editable={this.state.editableField} 
+                value={this.state.birth} keyboardType="number-pad" placeholder="Data de Nascimento (dd/mm/aaaa)" 
+                onChangeText={birth => this.setState({ birth })} 
+                ref={(input) => { this.birthDateTextInput = input; }} />
 
                 <TouchableOpacity ref={(ref) => this.updateButton = ref} onPress={() => { this.updateUser() }}>
                     <Text>
@@ -186,8 +198,12 @@ export default class Profile extends Component {
 
                 {this.state.changeEmail ?
                     <View>
-                        <TextInput style={mainStyles.input} keyboardType="email-address" placeholder="Novo e-mail" onChangeText={newEmail => this.setState({ newEmail })} />
-                        <TextInput style={mainStyles.input} secureTextEntry={true} placeholder="Insira sua senha para confirmação" onChangeText={password => this.setState({ password })} />
+                        <TextInput style={mainStyles.input} keyboardType="email-address" placeholder="Novo e-mail" 
+                        onChangeText={newEmail => this.setState({ newEmail })} 
+                        onSubmitEditing={() => { this.passwordTextInput.focus() }} blurOnSubmit={false} ref={(input) => { this.newEmailTextInput = input; }} />
+                       
+                        <TextInput style={mainStyles.input} secureTextEntry={true} placeholder="Insira sua senha para confirmação" 
+                        onChangeText={password => this.setState({ password })} ref={(input) => { this.passwordTextInput = input; }} />
                     </View>
                     :
                     null
@@ -201,8 +217,11 @@ export default class Profile extends Component {
 
                 {this.state.changePassword ?
                     <View>
-                        <TextInput style={mainStyles.input} secureTextEntry={true} placeholder="Senha atual" onChangeText={password => this.setState({ password })} />
-                        <TextInput style={mainStyles.input} secureTextEntry={true} placeholder="Nova Senha" onChangeText={newPassword => this.setState({ newPassword })} />
+                        <TextInput style={mainStyles.input} secureTextEntry={true} placeholder="Senha atual" 
+                        onChangeText={password => this.setState({ password })} 
+                        onSubmitEditing={() => { this.newPasswordTextInput.focus() }} blurOnSubmit={false} ref={(input) => { this.actualPasswordTextInput = input; }}/>
+                        <TextInput style={mainStyles.input} secureTextEntry={true} placeholder="Nova Senha" 
+                        onChangeText={newPassword => this.setState({ newPassword })} ref={(input) => { this.newPasswordTextInput = input; }} />
                     </View>
                     :
                     null
@@ -213,7 +232,12 @@ export default class Profile extends Component {
                         {this.state.passwordButtonText}
                     </Text>
                 </TouchableOpacity>
-            </View >
+
+                <TouchableOpacity onPress={()=>{ this.logout() }}>
+                    <Text>Desconectar</Text>
+                </TouchableOpacity>
+
+            </ImageBackground >
         )
     }
 }
