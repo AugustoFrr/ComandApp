@@ -16,14 +16,14 @@ export default styles = StyleSheet.create({
 
 
     titulo: {
-        fontSize: 26,
+        fontSize: 24,
         fontFamily: "Century Gothic",
         color: Colors.OutText,
         
     },
 
     subTitulo: {
-        fontSize: 18,
+        fontSize: 22,
         fontFamily: "Century Gothic",
         color: Colors.OutText,
         

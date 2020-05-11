@@ -12,7 +12,13 @@ export default styles = StyleSheet.create({
         width: "100%",
         alignItems: 'center',
         height: Dimensions.get('window').height
-        
+
+    },
+
+    scrollContainer: {
+        flex: 1,
+        width: "100%",
+        alignItems: 'center',
     },
 
     viewInput: {
@@ -33,6 +39,7 @@ export default styles = StyleSheet.create({
         shadowRadius: 4.65,
 
         elevation: 7,
+
     },
 
     iconInput: {
@@ -44,10 +51,86 @@ export default styles = StyleSheet.create({
         paddingRight: 10,
         paddingBottom: 10,
         paddingLeft: 0,
-        backgroundColor: '#fff',
         color: '#4D4D4D',
 
 
     },
+
+    btnDisconnectText: {
+        fontSize: 21,
+        fontFamily: 'Century Gothic',
+        color: Colors.red,
+        
+
+    },
+
+    btnDisconnect:{
+        height: 50,
+        justifyContent: "center",
+        borderRadius: 10,
+        width: '60%',
+        alignItems: 'center',
+        
+
+        borderColor: Colors.red,
+        borderWidth: 2
+
+    },
+
+    titulo: {
+        fontSize: 20,
+        fontFamily: "Century Gothic",
+        color: Colors.OutText,
+
+    },
+
+    subTitulo: {
+        fontSize: 16,
+        fontFamily: "Century Gothic",
+        color: Colors.OutText,
+
+
+    },
+
+    cardView:{
+        width: "100%",
+        marginTop: 10, 
+        flex: 1,
+        alignItems: 'center',
+        borderBottomColor: "#FFFFFF",
+        justifyContent: 'center',
+        backgroundColor: Colors.primary,
+        borderWidth: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 15,
+        paddingRight: 15,
+
+
+    },
+
+    cardViewDone:{
+        width: "100%",
+        marginTop: 10, 
+        flex: 1,
+        alignItems: 'center',
+        borderBottomColor: "#FFFFFF",
+        justifyContent: 'center',
+        backgroundColor: Colors.green,
+        
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 15,
+        paddingRight: 15,
+
+
+    },
+
+    cardText:{
+        fontSize: 16,
+        fontFamily: "Century Gothic",
+        color: "#FFFFFF",
+    }
+
 
 })
