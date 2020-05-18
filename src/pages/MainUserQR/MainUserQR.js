@@ -47,10 +47,10 @@ export default class MainUserQR extends Component {
     }
 
     generateCode = () => {
-        const uid = firebaseApp.auth().currentUser.uid;
+        const link = firebaseApp.auth().currentUser.uid;
         const user = {
             comandApp: '1',
-            uid
+            link
         }
 
         return JSON.stringify(user);

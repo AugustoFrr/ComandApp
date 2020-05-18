@@ -29,9 +29,9 @@ export default styles = StyleSheet.create({
     },
     header:{
         width: "90%",
-        
+        backgroundColor: Colors.primary,
         flex: 2,
-        
+        borderBottomEndRadius: 20,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between"

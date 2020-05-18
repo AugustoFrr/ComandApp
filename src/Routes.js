@@ -34,15 +34,62 @@ export default function Routes() {
       <Stack.Screen name="EmailVerification" component={EmailVerification} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Scanner" component={Scanner} />
-      <Stack.Screen name="TabRoutes" component={TabRoutes} />
+      <Stack.Screen name="comandaTabs" component={comandaTabRoutes} initialParams={{tableNumber: '-1', name: ''}}/>
       <Stack.Screen name="Friends" component={Friends} />
     </Stack.Navigator>
   )
 }
 
-function TabRoutes() {
+function comandaTabRoutes() {
   return (
-    <Tab.Navigator backBehavior={"none"}>
+    <Tab.Navigator backBehavior={"none"}
+
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+
+        if (route.name === 'Comanda') {
+          iconName = focused ? 'qrcode-edit' : 'qrcode-edit';
+          color = focused ? Colors.red : "#FFF";
+
+        } else if (route.name === 'ProductMenu') {
+          iconName = focused ? 'cart' : 'cart';
+          color = focused ? Colors.green : "#FFF";
+
+
+        } 
+
+
+        return <Icon name={iconName} size={size} color={color} />;
+      }, 
+
+      tabBarLabel: ({color, focused})=>{
+        let labelName;
+        
+
+        if (route.name === 'Comanda') {
+          labelName = 'Comanda'
+          color = focused ? Colors.red : "#FFF";
+
+        } else if (route.name === 'ProductMenu') {
+          labelName = 'Cardápio';
+          color = focused ? Colors.green : "#FFF";
+
+
+        } 
+        return <Text style={{color: color, fontFamily: 'Century Gothic'}}>{labelName}</Text>
+      }
+      
+    })}
+
+    tabBarOptions={{
+      activeTintColor: Colors.red,
+
+      inactiveTintColor: "#FFF",
+      activeBackgroundColor: Colors.primary,
+      inactiveBackgroundColor: Colors.primary,
+    }}>
+
       <Tab.Screen name="Comanda" component={Comanda} />
       <Tab.Screen name="ProductMenu" component={ProductMenu} />
     </Tab.Navigator>
