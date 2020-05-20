@@ -6,9 +6,6 @@ import styles from './Styles'
 const comandico = require("../../img/comandico.png")
 const backgroundImage = require("../../img/background.png")
 
-
-
-
 export default class Splash extends Component {
 
     componentDidMount() {

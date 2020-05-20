@@ -50,11 +50,11 @@ function comandaTabRoutes() {
 
         if (route.name === 'Comanda') {
           iconName = focused ? 'qrcode-edit' : 'qrcode-edit';
-          color = focused ? Colors.red : "#FFF";
+          color = focused ? Colors.green : "#FFF";
 
         } else if (route.name === 'ProductMenu') {
           iconName = focused ? 'cart' : 'cart';
-          color = focused ? Colors.green : "#FFF";
+          color = focused ? Colors.blue : "#FFF";
 
 
         } 
@@ -69,11 +69,11 @@ function comandaTabRoutes() {
 
         if (route.name === 'Comanda') {
           labelName = 'Comanda'
-          color = focused ? Colors.red : "#FFF";
+          color = focused ? Colors.green : "#FFF";
 
         } else if (route.name === 'ProductMenu') {
           labelName = 'Cardápio';
-          color = focused ? Colors.green : "#FFF";
+          color = focused ? Colors.blue : "#FFF";
 
 
         } 

@@ -14,6 +14,14 @@ export default styles = StyleSheet.create({
         height: Dimensions.get('window').height
 
     },
+    container2: {
+        backgroundColor: 'rgba(46, 47, 49,0.05)',
+        flex: 1,
+        width: "100%",
+        alignItems: 'center',
+        height: Dimensions.get('window').height
+
+    },
 
     header:{
         flex: 2,
@@ -36,22 +44,28 @@ export default styles = StyleSheet.create({
         fontSize: 18,
         color: Colors.primary,
         fontFamily: 'Century Gothic',
+        textAlign: 'center'
     },
 
     botaoFinalizar:{
-        borderWidth: 1,
         flexDirection: 'row',
         paddingHorizontal: 20,
         paddingVertical: 10,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'space-between',
+        borderColor: Colors.green,
+        backgroundColor: 'rgba(57, 255, 20, 0.05)',
+        borderWidth: 3,
+        borderRadius: 6,
         
         
     },
 
     textoFinalizar:{
+        marginLeft: 10,
         color: Colors.primary,
         fontSize: 20,
+        fontWeight: 'bold',
         fontFamily: 'Century Gothic'
     },
 
@@ -86,5 +100,71 @@ export default styles = StyleSheet.create({
         shadowRadius: 4.65,
 
         elevation: 7, 
+    },
+
+    itemContainer:{
+        width: '90%', 
+        height: 90, 
+        alignSelf: 'center',
+        margin: 10,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+
+        elevation: 7,
+        padding: 10
+    },
+
+    comandaView:{
+        height: 70, 
+        width: 70, 
+        borderRadius: 70/2, 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+
+        elevation: 7,
+        padding: 10
+    },
+
+    comandaImage:{
+        width: 68,
+        height: 68,
+        borderRadius: 68/2
+        
+
+    },
+
+    productName:{
+        textAlign: 'center',
+        fontSize: 16,
+        color: Colors.primary,
+        fontFamily: 'Century Gothic',
+        marginBottom: 5,
+        
+
+    },
+
+    productQtd:{
+        borderTopWidth: 1,
+        paddingTop: 5,
+        borderColor: Colors.primary,
+        textAlign: 'center',
+        fontSize: 15,
+        color: Colors.primary,
+        fontFamily: 'Century Gothic',
+
     }
 })
