@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const backgroundImage = require("../../img/background.png")
 
-const comandico = require("../../img/comandico.png")
+const comandico = require("../../img/white-comandico.png")
 const macarrao = require("../../img/macarrao.jpg")
 
 
@@ -89,7 +89,7 @@ export default class Comanda extends Component {
                                 {this.state.name}
                             </Text>
 
-                            <Text style={styles.subTitulo}>
+                            <Text style={[styles.subTitulo, {alignSelf: 'flex-start'}]}>
                                 Mesa: {this.state.mesa}
                             </Text>
 

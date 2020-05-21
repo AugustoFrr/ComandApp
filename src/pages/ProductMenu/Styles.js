@@ -34,7 +34,7 @@ export default styles = StyleSheet.create({
     },
 
     titulo:{
-        fontSize: 20,
+        fontSize: 24,
         color: Colors.primary,
         fontFamily: 'Century Gothic',
 
@@ -53,8 +53,8 @@ export default styles = StyleSheet.create({
         paddingVertical: 10,
         alignItems: 'center',
         justifyContent: 'space-between',
-        borderColor: Colors.green,
-        backgroundColor: 'rgba(57, 255, 20, 0.05)',
+        borderColor: Colors.blue,
+        backgroundColor: 'rgba(0, 204, 255, 0.05)',
         borderWidth: 3,
         borderRadius: 6,
         
@@ -85,8 +85,8 @@ export default styles = StyleSheet.create({
 
     middleContainer:{
         backgroundColor: '#ffffff',
-        width: '80%',
-        flex: 6, 
+        width: '90%',
+        flex: 9, 
         alignItems: 'center', 
         justifyContent: 'space-evenly',
         borderRadius: 20,
@@ -100,6 +100,7 @@ export default styles = StyleSheet.create({
         shadowRadius: 4.65,
 
         elevation: 7, 
+        
     },
 
     itemContainer:{
