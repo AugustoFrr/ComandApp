@@ -75,7 +75,6 @@ export default class Scanner extends Component {
                 break;
 
             case "2":
-
                 this.getCompanyData(qrCode.link)
 
 

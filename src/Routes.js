@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text} from 'react-native'
+import { Text } from 'react-native'
 
 import Main from './pages/Main/Main'
 import Splash from './pages/Splash/Splash'
@@ -13,6 +13,8 @@ import ProductMenu from './pages/ProductMenu/ProductMenu'
 import MainSearch from './pages/MainSearch/MainSearch'
 import MainUserQR from './pages/MainUserQR/MainUserQR'
 import Friends from './pages/Friends/Friends'
+import Payment from './pages/Payment/Payment'
+import PaymentFinished from './pages/PaymentFinished/PaymentFinished'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Colors from './styles/colors'
@@ -34,61 +36,64 @@ export default function Routes() {
       <Stack.Screen name="EmailVerification" component={EmailVerification} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Scanner" component={Scanner} />
-      <Stack.Screen name="comandaTabs" component={comandaTabRoutes} initialParams={{tableNumber: '-1', name: ''}}/>
+      <Stack.Screen name="comandaTabs" component={comandaTabRoutes} initialParams={{ tableNumber: '-1', name: '' }} />
       <Stack.Screen name="Friends" component={Friends} />
+      <Stack.Screen name="Payment" component={Payment} />
+      <Stack.Screen name="PaymentFinished" component={PaymentFinished} />
     </Stack.Navigator>
   )
 }
 
 function comandaTabRoutes() {
+  
   return (
     <Tab.Navigator backBehavior={"none"}
 
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused, color, size }) => {
-        let iconName;
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
 
-        if (route.name === 'Comanda') {
-          iconName = focused ? 'qrcode-edit' : 'qrcode-edit';
-          color = focused ? Colors.green : "#FFF";
+          if (route.name === 'Comanda') {
+            iconName = focused ? 'qrcode-edit' : 'qrcode-edit';
+            color = focused ? Colors.green : "#FFF";
 
-        } else if (route.name === 'ProductMenu') {
-          iconName = focused ? 'cart' : 'cart';
-          color = focused ? Colors.blue : "#FFF";
-
-
-        } 
+          } else if (route.name === 'ProductMenu') {
+            iconName = focused ? 'cart' : 'cart';
+            color = focused ? Colors.blue : "#FFF";
 
 
-        return <Icon name={iconName} size={size} color={color} />;
-      }, 
-
-      tabBarLabel: ({color, focused})=>{
-        let labelName;
-        
-
-        if (route.name === 'Comanda') {
-          labelName = 'Comanda'
-          color = focused ? Colors.green : "#FFF";
-
-        } else if (route.name === 'ProductMenu') {
-          labelName = 'Cardápio';
-          color = focused ? Colors.blue : "#FFF";
+          }
 
 
-        } 
-        return <Text style={{color: color, fontFamily: 'Century Gothic'}}>{labelName}</Text>
-      }
-      
-    })}
+          return <Icon name={iconName} size={size} color={color} />;
+        },
 
-    tabBarOptions={{
-      activeTintColor: Colors.red,
+        tabBarLabel: ({ color, focused }) => {
+          let labelName;
 
-      inactiveTintColor: "#FFF",
-      activeBackgroundColor: Colors.primary,
-      inactiveBackgroundColor: Colors.primary,
-    }}>
+
+          if (route.name === 'Comanda') {
+            labelName = 'Comanda'
+            color = focused ? Colors.green : "#FFF";
+
+          } else if (route.name === 'ProductMenu') {
+            labelName = 'Cardápio';
+            color = focused ? Colors.blue : "#FFF";
+
+
+          }
+          return <Text style={{ color: color, fontFamily: 'Century Gothic' }}>{labelName}</Text>
+        }
+
+      })}
+
+      tabBarOptions={{
+        activeTintColor: Colors.red,
+
+        inactiveTintColor: "#FFF",
+        activeBackgroundColor: Colors.primary,
+        inactiveBackgroundColor: Colors.primary,
+      }}>
 
       <Tab.Screen name="Comanda" component={Comanda} />
       <Tab.Screen name="ProductMenu" component={ProductMenu} />
@@ -98,7 +103,7 @@ function comandaTabRoutes() {
 
 function mainTabRoutes() {
   return (
-    <Tab.Navigator 
+    <Tab.Navigator
       backBehavior={"none"}
 
       screenOptions={({ route }) => ({
@@ -122,11 +127,11 @@ function mainTabRoutes() {
 
 
           return <Icon name={iconName} size={size} color={color} />;
-        }, 
+        },
 
-        tabBarLabel: ({color, focused})=>{
+        tabBarLabel: ({ color, focused }) => {
           let labelName;
-          
+
 
           if (route.name === 'Home') {
             labelName = 'Home'
@@ -143,14 +148,29 @@ function mainTabRoutes() {
 
           }
 
-          return <Text style={{color: color, fontFamily: 'Century Gothic'}}>{labelName}</Text>
-        }
-        
+          return <Text style={{ color: color, fontFamily: 'Century Gothic' }}>{labelName}</Text>
+        },
+
+
+
       })}
 
+
+
       tabBarOptions={{
+
+        style: {
+          borderTopColor: 'transparent',
+          backgroundColor: 'transparent',
+
+        },
+
+        
+
+
         activeTintColor: Colors.red,
-  
+
+
         inactiveTintColor: "#FFF",
         activeBackgroundColor: Colors.primary,
         inactiveBackgroundColor: Colors.primary,
@@ -162,6 +182,9 @@ function mainTabRoutes() {
       <Tab.Screen name="Perfil" component={MainUserQR} />
     </Tab.Navigator>
   )
+
+  
 }
+
 
 
