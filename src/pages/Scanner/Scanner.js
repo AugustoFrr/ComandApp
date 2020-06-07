@@ -4,6 +4,7 @@ import QRCodeScanner from 'react-native-qrcode-scanner'
 const backgroundImage = require("../../img/background-dark.png")
 const comandico = require("../../img/comandico.png")
 const comandicoSad = require("../../img/comandico-sad.png")
+const fachada = require("../../img/fachada.jpg")
 import Colors from '../../styles/colors'
 import Icon from 'react-native-vector-icons/Ionicons'
 import styles from './Styles'
@@ -65,7 +66,7 @@ export default class Scanner extends Component {
         try {
             qrCode = JSON.parse(codigo)
         } catch (exception) {
-            qrCode.comandApp = "0"
+            qrCode = {comandApp: "0"}
         }
 
         switch (qrCode.comandApp) {
@@ -119,7 +120,7 @@ export default class Scanner extends Component {
                             <View style={styles.viewCentro}>
                                 <View style={styles.card}>
                                     <View style={styles.imageView}>
-                                        <Image source={this.state.exibirNome ? comandico : comandicoSad} style={styles.imageIcon} />
+                                        <Image source={this.state.exibirNome ? fachada : comandicoSad} style={styles.imageIcon} />
 
                                     </View>
                                     {this.state.exibirNome ?

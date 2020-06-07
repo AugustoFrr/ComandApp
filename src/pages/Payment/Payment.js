@@ -25,10 +25,10 @@ export default class Payment extends Component {
         var total = 0;
         await firebaseApp.database().ref("Comanda").child(this.state.comanda).child("Produtos").once('value', (snapshot) => {
             snapshot.forEach(item => {
-                total += parseFloat(item.child("preco").val()) * parseFloat(item.child("quantidade").val());
+                total += parseFloat(item.child("preco").val().toString().replace("R$", "").replace(",",".")) * parseFloat(item.child("quantidade").val());
             })
 
-            total = total.toString().replace(".", ",")
+            total = total.toString().replace(".", ",").substring(0, 5)
             this.setState({ total })
         })
     }
@@ -96,7 +96,7 @@ export default class Payment extends Component {
                 </View>
 
                 <View style={styles.rodape}>
-                    <TouchableOpacity style={styles.rodapeButton}>
+                    <TouchableOpacity onPress={()=> this.props.navigation.goBack()} style={styles.rodapeButton}>
                         <Text style={styles.rodapeText}>Voltar</Text>
                     </TouchableOpacity>
                 </View>

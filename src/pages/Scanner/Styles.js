@@ -75,7 +75,7 @@ export default styles = StyleSheet.create({
         width: '70%',
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
         backgroundColor: '#FFF',
         borderRadius: 15,
         margin: 20,
@@ -180,7 +180,8 @@ export default styles = StyleSheet.create({
         color: Colors.primary,
         fontSize: 18,
         fontFamily: 'Century Gothic',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginHorizontal: 10,
     }
 
 })
